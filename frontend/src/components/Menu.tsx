@@ -17,11 +17,11 @@ export default function Menu() {
 
   return (
     <>
-      <button style={styles.avatar} onClick={() => setOuvert(!ouvert)}>
-        {nom.charAt(0).toUpperCase()}
-      </button>
-
-      {ouvert && (
+{!ouvert && (
+  <button style={styles.avatar} onClick={() => setOuvert(true)}>
+    {nom.charAt(0).toUpperCase()}
+  </button>
+)}      {ouvert && (
         <div style={styles.overlay} onClick={() => setOuvert(false)} />
       )}
 
