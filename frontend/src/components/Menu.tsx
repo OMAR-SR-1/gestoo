@@ -17,19 +17,17 @@ export default function Menu() {
 
   return (
     <>
-      <button style={styles.hamburger} onClick={() => setOuvert(!ouvert)}>
-        <div style={styles.barre} />
-        <div style={styles.barre} />
-        <div style={styles.barre} />
+      <button style={styles.avatar} onClick={() => setOuvert(!ouvert)}>
+        {nom.charAt(0).toUpperCase()}
       </button>
 
       {ouvert && (
         <div style={styles.overlay} onClick={() => setOuvert(false)} />
       )}
 
-      <div style={{ ...styles.menu, transform: ouvert ? "translateX(0)" : "translateX(-100%)" }}>
+      <div style={{ ...styles.menu, transform: ouvert ? "translateX(0)" : "translateX(100%)" }}>
         <div style={styles.profil}>
-          <div style={styles.avatar}>{nom.charAt(0).toUpperCase()}</div>
+          <div style={styles.avatarGrand}>{nom.charAt(0).toUpperCase()}</div>
           <div>
             <div style={styles.profilNom}>{nom}</div>
             <div style={styles.profilBoutique}>{boutique}</div>
@@ -61,24 +59,21 @@ export default function Menu() {
 }
 
 const styles: Record<string, React.CSSProperties> = {
-  hamburger: {
+  avatar: {
     position: "fixed",
     top: 20,
-    left: 20,
-    background: "none",
+    right: 20,
+    width: 38,
+    height: 38,
+    borderRadius: "50%",
+    background: "#1a6b3c",
+    color: "#fff",
     border: "none",
+    fontSize: 14,
+    fontWeight: 700,
     cursor: "pointer",
     zIndex: 1000,
-    display: "flex",
-    flexDirection: "column",
-    gap: 5,
-    padding: 4,
-  },
-  barre: {
-    width: 22,
-    height: 2,
-    background: "#0f0f0f",
-    borderRadius: 2,
+    fontFamily: "Inter, sans-serif",
   },
   overlay: {
     position: "fixed",
@@ -92,7 +87,7 @@ const styles: Record<string, React.CSSProperties> = {
   menu: {
     position: "fixed",
     top: 0,
-    left: 0,
+    right: 0,
     bottom: 0,
     width: 280,
     background: "#fff",
@@ -102,7 +97,7 @@ const styles: Record<string, React.CSSProperties> = {
     flexDirection: "column",
     gap: 4,
     transition: "transform 0.25s ease",
-    boxShadow: "4px 0 24px #00000015",
+    boxShadow: "-4px 0 24px #00000015",
   },
   profil: {
     display: "flex",
@@ -110,7 +105,7 @@ const styles: Record<string, React.CSSProperties> = {
     gap: 12,
     marginBottom: 8,
   },
-  avatar: {
+  avatarGrand: {
     width: 44,
     height: 44,
     borderRadius: "50%",
@@ -134,4 +129,4 @@ const styles: Record<string, React.CSSProperties> = {
     cursor: "pointer",
     borderRadius: 8,
   },
-} 
+}
