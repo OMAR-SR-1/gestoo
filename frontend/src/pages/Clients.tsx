@@ -24,9 +24,14 @@ export default function Clients() {
   }
 
   const ouvrirClient = async (client: Client) => {
-    setClientSelectionne(client)
-    const res = await api.get(`/clients/${client.id}/remboursements`)
-    setRemboursements(res.data)
+    try {
+      setRemboursements([])
+      setClientSelectionne(client)
+      const res = await api.get(`/clients/${client.id}/remboursements`)
+      setRemboursements(res.data)
+    } catch {
+      setRemboursements([])
+    }
   }
 
   const rembourser = async () => {
