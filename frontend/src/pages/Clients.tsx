@@ -13,6 +13,7 @@ export default function Clients() {
   const [clientSelectionne, setClientSelectionne] = useState<Client | null>(null)
   const [remboursements, setRemboursements] = useState<Remboursement[]>([])
   const [montantRemb, setMontantRemb] = useState("")
+  const [chargement, setChargement] = useState(false)
 
   const charger = () => api.get("/clients/").then((res) => setClients(res.data))
 
@@ -24,14 +25,16 @@ export default function Clients() {
   }
 
   const ouvrirClient = async (client: Client) => {
+    setChargement(true)
+    setRemboursements([])
+    setClientSelectionne(client)
     try {
-      setRemboursements([])
-      setClientSelectionne(client)
       const res = await api.get(`/clients/${client.id}/remboursements`)
       setRemboursements(res.data)
     } catch {
       setRemboursements([])
     }
+    setChargement(false)
   }
 
   const rembourser = async () => {
@@ -55,6 +58,14 @@ export default function Clients() {
   const totalDettes = clients.reduce((acc, c) => acc + c.dette, 0)
 
   if (clientSelectionne) {
+    if (chargement) {
+      return (
+        <div style={{ ...styles.page, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <p style={{ color: "#999", fontSize: 14 }}>Chargement...</p>
+        </div>
+      )
+    }
+
     return (
       <div style={styles.page}>
         <div style={styles.header}>
