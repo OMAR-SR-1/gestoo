@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import api from "../api"
+import Menu from "../components/Menu"
 
 interface VentesJour {
   total: number
@@ -12,7 +13,6 @@ interface VentesJour {
 }
 
 export default function Dashboard() {
-  const nom = localStorage.getItem("nom") || ""
   const boutique = localStorage.getItem("boutique") || ""
   const [data, setData] = useState<VentesJour>({ total: 0, ventes: [] })
   const [alertes, setAlertes] = useState<Array<{ id: number; nom: string; quantite: number }>>([])
@@ -22,18 +22,12 @@ export default function Dashboard() {
     api.get("/produits/alertes").then((res) => setAlertes(res.data))
   }, [])
 
-  const deconnexion = () => {
-    localStorage.clear()
-    window.location.href = "/connexion"
-  }
-
   return (
     <div style={styles.page}>
+      <Menu />
+
       <div style={styles.header}>
         <div style={styles.logo}>Gëstoo</div>
-        <div style={styles.avatar} onClick={deconnexion} title="Se déconnecter">
-          {nom.charAt(0).toUpperCase()}
-        </div>
       </div>
 
       <div style={styles.cartePrincipale}>
@@ -83,9 +77,8 @@ export default function Dashboard() {
 
 const styles: Record<string, React.CSSProperties> = {
   page: { minHeight: "100vh", background: "#f7f7f2", fontFamily: "Inter, sans-serif", maxWidth: 420, margin: "0 auto", paddingBottom: 100 },
-  header: { padding: "28px 24px 0", display: "flex", justifyContent: "space-between", alignItems: "center" },
+  header: { padding: "28px 24px 0 64px", display: "flex", justifyContent: "space-between", alignItems: "center" },
   logo: { fontFamily: "serif", fontSize: 22, fontWeight: 800, color: "#0f0f0f", letterSpacing: -1 },
-  avatar: { width: 38, height: 38, borderRadius: "50%", background: "#1a6b3c", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700, color: "#fff", cursor: "pointer" },
   cartePrincipale: { margin: "28px 24px 0", background: "#0f0f0f", borderRadius: 24, padding: "32px 28px" },
   date: { fontSize: 12, color: "#666", marginBottom: 20 },
   label: { fontSize: 12, textTransform: "uppercase" as const, letterSpacing: 1, color: "#555", marginBottom: 8 },

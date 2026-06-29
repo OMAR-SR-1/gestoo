@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import api from "../api"
+import Menu from "../components/Menu"
 
 interface Produit { id: number; nom: string; prix: number }
 interface Vente { id: number; montant: number; statut: string; date: string }
@@ -44,6 +45,7 @@ export default function Ventes() {
 
   return (
     <div style={styles.page}>
+      <Menu />
       <div style={styles.header}>
         <span style={styles.retour} onClick={() => window.location.href = "/"}>← Retour</span>
         <h2 style={styles.titre}>Mes ventes</h2>

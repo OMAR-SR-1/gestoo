@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import api from "../api"
+import Menu from "../components/Menu"
+
 
 interface Client { id: number; nom: string; telephone: string; dette: number }
 interface Remboursement { id: number; montant: number; date: string }
@@ -68,6 +70,7 @@ export default function Clients() {
 
     return (
       <div style={styles.page}>
+        <Menu />
         <div style={styles.header}>
           <span style={styles.retour} onClick={() => setClientSelectionne(null)}>← Retour</span>
           <h2 style={styles.titre}>{clientSelectionne.nom}</h2>

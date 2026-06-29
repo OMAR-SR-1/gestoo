@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import api from "../api"
+import Menu from "../components/Menu"
 
 interface Produit {
   id: number
@@ -33,6 +34,7 @@ export default function Produits() {
 
   return (
     <div style={styles.page}>
+      <Menu />
       <div style={styles.header}>
         <span style={styles.retour} onClick={() => window.location.href = "/"}>← Retour</span>
         <h2 style={styles.titre}>Mon stock</h2>
