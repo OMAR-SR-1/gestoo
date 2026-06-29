@@ -61,8 +61,8 @@ export default function Menu() {
 const styles: Record<string, React.CSSProperties> = {
   avatar: {
     position: "fixed",
-    top: 20,
-    right: 20,
+    top: 28,
+    right: "calc(50% - 186px)",
     width: 38,
     height: 38,
     borderRadius: "50%",
